@@ -23,7 +23,7 @@ const Fir = new mongoose.Schema(
         type: String,
         required: true,
       },
-      adhaarNo: {
+      aadharNo: {
         type: String,
         required: true,
       },

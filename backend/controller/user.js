@@ -71,12 +71,14 @@ module.exports = {
 
             return res
               .status(200)
-              .json({ message: "user login successfully", token });
+              .json({ message: "user login successfully", token, user });
           } else {
             return res.status(401).json({ message: "wrong credentials" });
           }
         } else {
-          return res.status(404).json({ error: "user not found", status: 404 });
+          return res
+            .status(404)
+            .json({ message: "user not found", status: 404 });
         }
       }
     } catch (err) {
