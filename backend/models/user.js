@@ -1,19 +1,33 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
 
-const userSchema = new mongoose.Schema({
-    name: String,
-    userid: String,
-    email:String,
-    password: String,
-    tokens: [
-        {
-          token: {
-            type: String,
-            required: true,
-          },
-        },
-      ],
-})
+const User = new mongoose.Schema({
+  userName: {
+    type: String,
+    required: true,
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  userType: {
+    type: String,
+    enum: ["citizen", "policeMen"],
+    default: "citizen",
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
 
-module.exports  =  mongoose.model("User", userSchema)
+module.exports = mongoose.model("User", User);
