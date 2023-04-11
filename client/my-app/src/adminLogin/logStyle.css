@@ -33,6 +33,7 @@ h5 {
 }
 
 body {
+  background-image: url("../images/background-login-signup.jpg");
   font-family: 'Lora', 'Times New Roman', serif;
   background-color: var(--bg-color);
   color: var(--free);

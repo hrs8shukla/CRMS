@@ -13,27 +13,26 @@ export default function FIRForm() {
     state: "",
     district: "",
     policeStation: "",
-    fIRno: "",
-    date: "",
+    // fIRno: "",
 
-    act1: "",
-    sections1: "",
-    act2: "",
-    sections2: "",
-    act3: "",
-    sections3: "",
-    otherActsAndSections: "",
+    // act1: "",
+    // sections1: "",
+    // act2: "",
+    // sections2: "",
+    // act3: "",
+    // sections3: "",
+    // otherActsAndSections: "",
 
     occurenceDay: "",
     occurenceDate: "",
     occurenceTime: "",
-    informatioReceivedDate: "",
-    informatioReceivedTime: "",
-    diaryReferenceEntryNo: "",
-    diaryReferenceTime: "",
+    // informatioReceivedDate: "",
+    // informatioReceivedTime: "",
+    // diaryReferenceEntryNo: "",
+    // diaryReferenceTime: "",
 
-    written: "",
-    oral: "",
+    // written: "",
+    // oral: "",
 
     directionAndDistncefromPS: "",
     beatNo: "",
@@ -51,15 +50,14 @@ export default function FIRForm() {
     complainantAddress: "",
 
     detailsOfSuspected: "",
-    reasonsforDelay: "",
+    detailsOfCrime: "",
     particularsOfPropertiesStolenInvolved: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
     setUser({
       ...user,
-      [name]: value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -68,24 +66,11 @@ export default function FIRForm() {
       state,
       district,
       policeStation,
-      fIRno,
-      date,
-      act1,
-      sections1,
-      act2,
-      sections2,
-      act3,
-      sections3,
-      otherActsAndSections,
       occurenceDay,
       occurenceDate,
       occurenceTime,
       informatioReceivedDate,
       informatioReceivedTime,
-      diaryReferenceEntryNo,
-      diaryReferenceTime,
-      written,
-      oral,
       directionAndDistncefromPS,
       beatNo,
       address,
@@ -100,28 +85,20 @@ export default function FIRForm() {
       complainantPlaceOfIssue,
       complainantAddress,
       detailsOfSuspected,
-      reasonsforDelay,
+      detailsOfCrime,
       particularsOfPropertiesStolenInvolved,
     } = user;
+
     if (
+      state &&
       district &&
       policeStation &&
-      fIRno &&
-      act1 &&
-      sections1 &&
-      act2 &&
-      sections2 &&
-      act3 &&
-      sections3 &&
-      otherActsAndSections &&
       occurenceDay &&
-      informatioReceivedDate &&
-      informatioReceivedTime &&
-      diaryReferenceEntryNo &&
+      occurenceDate &&
+      occurenceTime &&
       directionAndDistncefromPS &&
       beatNo &&
       address &&
-      outsideNameofPSAndDistrict &&
       complainantName &&
       complainantFatherorHusbandName &&
       complainantDateOfBirth &&
@@ -131,13 +108,16 @@ export default function FIRForm() {
       complainantPlaceOfIssue &&
       complainantAddress &&
       detailsOfSuspected &&
-      reasonsforDelay &&
+      detailsOfCrime &&
       particularsOfPropertiesStolenInvolved
     ) {
-      axios.post("http://localhost:9002/FIRform", user).then((res) => {
-        alert(res.data.message);
-        history.push("/Footer");
-      });
+      console.log(user);
+      //     axios.post("http://localhost:9002/FIRform", user)
+      //     .then( res => {
+      //         alert(res.data.message)
+      //         history.push("/Footer")
+      //     })
+      // }
     } else {
       alert("invalid input");
     }
@@ -146,7 +126,7 @@ export default function FIRForm() {
   return (
     <>
       <Navbar />
-      {console.log("FIRUser", user)}
+
       <div className="FIR-container ">
         <form id="form" className="FIR-form">
           <div className="FIR-head-sign">
@@ -156,7 +136,7 @@ export default function FIRForm() {
           <hr className="FIR-center-ball" />
 
           <div>
-            <span className="FIR-simp-text2">1</span>
+            <span className="FIR-simp-text2">1.</span>
             <div className="FIR-form-control FIR-add-pre-sub">
               <label
                 for="inputState"
@@ -231,7 +211,8 @@ export default function FIRForm() {
 
             <div className="FIR-form-control FIR-add-pre-sub">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
-                Police Station
+                {" "}
+                Nearest Police Station(to Crime)
               </label>
               <input
                 id="inputZip"
@@ -243,175 +224,70 @@ export default function FIRForm() {
               />
             </div>
 
-            <div className="FIR-form-control FIR-add-pre-sub">
-              <label for="inputZip" className="FIR-form-label FIR-small-label">
-                FIR No
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control1 FIR-zip-input"
-                name="fIRno"
-                value={user.fIRno}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
-
-            <div className="FIR-form-control FIR-add-pre-sub">
-              <label for="inputZip" className="FIR-form-label FIR-small-label">
-                Date
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control1 FIR-zip-input"
-                name="date"
-                value={user.date}
-                onChange={handleChange}
-                type="Date"
-              />
-            </div>
+            {/* <div className="FIR-form-control FIR-add-pre-sub">
+          <label for="inputZip" className="FIR-form-label FIR-small-label">FIR No</label>
+          <input id="inputZip" className="FIR-form-control1 FIR-zip-input" name="fIRno" value={user.fIRno} onChange={ handleChange } type="text"  />
+        </div> */}
           </div>
 
           {/*<!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SECTION 2 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->*/}
 
-          <div>
-            <span className="FIR-simp-text2">2</span>
-            <div className="FIR-form-control  FIR-add-pre-sub1">
-              <span className="FIR-simp-text">(i)</span>
-              <label
-                for="inputZip"
-                className="FIR-one-line FIR-form-label FIR-small-label"
-              >
-                *Act
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control2 FIR-zip-input1"
-                name="act1"
-                value={user.act1}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
+          {/* <div>
+        <span className="FIR-simp-text2">2</span>
+        <div className="FIR-form-control  FIR-add-pre-sub1"><span className="FIR-simp-text">(i)</span>
+          <label for="inputZip" className="FIR-one-line FIR-form-label FIR-small-label">*Act</label>
+          <input id="inputZip" className="FIR-form-control2 FIR-zip-input1" name="act1" value={user.act1} onChange={ handleChange } type="text"  />
+        </div>
 
-            <div className="FIR-form-control FIR-add-pre-sub1">
-              <label
-                for="inputZip"
-                className="FIR-one-line FIR-form-label FIR-small-label"
-              >
-                *Sections
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control2 FIR-zip-input2"
-                name="sections1"
-                value={user.sections1}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
+        <div className="FIR-form-control FIR-add-pre-sub1">
+          <label for="inputZip" className="FIR-one-line FIR-form-label FIR-small-label">*Sections</label>
+          <input id="inputZip" className="FIR-form-control2 FIR-zip-input2" name="sections1" value={user.sections1} onChange={ handleChange } type="text"  />
+        </div>
 
-            <div className="FIR-form-control  FIR-add-pre-sub1 FIR-div-sec-section">
-              <span className="FIR-simp-text">(ii)</span>
-              <label
-                for="inputZip"
-                className="FIR-one-line FIR-form-label FIR-small-label"
-              >
-                *Act
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control2 FIR-zip-input1"
-                name="act2"
-                value={user.act2}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
 
-            <div className="FIR-form-control FIR-add-pre-sub1">
-              <label
-                for="inputZip"
-                className="FIR-one-line FIR-form-label FIR-small-label"
-              >
-                *Sections
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control2 FIR-zip-input2"
-                name="sections2"
-                value={user.sections2}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
+        <div className="FIR-form-control  FIR-add-pre-sub1 FIR-div-sec-section"><span className="FIR-simp-text">(ii)</span>
+          <label for="inputZip" className="FIR-one-line FIR-form-label FIR-small-label">*Act</label>
+          <input id="inputZip" className="FIR-form-control2 FIR-zip-input1" name="act2" value={user.act2} onChange={ handleChange } type="text"  />
+        </div>
 
-            <div className="FIR-form-control  FIR-add-pre-sub1 FIR-div-sec-section">
-              <span className="FIR-simp-text">(iii)</span>
-              <label
-                for="inputZip"
-                className="FIR-one-line FIR-form-label FIR-small-label"
-              >
-                *Act
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control2 FIR-zip-input1"
-                name="act3"
-                value={user.act3}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
+        <div className="FIR-form-control FIR-add-pre-sub1">
+          <label for="inputZip" className="FIR-one-line FIR-form-label FIR-small-label">*Sections</label>
+          <input id="inputZip" className="FIR-form-control2 FIR-zip-input2" name="sections2" value={user.sections2} onChange={ handleChange } type="text"  />
+        </div>
 
-            <div className="FIR-form-control FIR-add-pre-sub1">
-              <label
-                for="inputZip"
-                className="FIR-one-line FIR-form-label FIR-small-label"
-              >
-                *Sections
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control2 FIR-zip-input2"
-                name="sections3"
-                value={user.sections3}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
 
-            <div className="FIR-form-control  FIR-add-pre-sub2">
-              <span className="FIR-simp-text">(iii)</span>
-              <label
-                for="inputZip"
-                className="FIR-one-line FIR-form-label FIR-small-label"
-              >
-                *Other Acts & Sections
-              </label>
-              <input
-                id="inputZip"
-                className="FIR-form-control2 FIR-zip-input1"
-                name="otherActsAndSections"
-                value={user.otherActsAndSections}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
-          </div>
+
+
+        <div className="FIR-form-control  FIR-add-pre-sub1 FIR-div-sec-section"><span className="FIR-simp-text">(iii)</span>
+          <label for="inputZip" className="FIR-one-line FIR-form-label FIR-small-label">*Act</label>
+          <input id="inputZip" className="FIR-form-control2 FIR-zip-input1" name="act3" value={user.act3} onChange={ handleChange } type="text" />
+        </div>
+
+        <div className="FIR-form-control FIR-add-pre-sub1">
+          <label for="inputZip" className="FIR-one-line FIR-form-label FIR-small-label">*Sections</label>
+          <input id="inputZip" className="FIR-form-control2 FIR-zip-input2" name="sections3" value={user.sections3} onChange={ handleChange } type="text" />
+        </div>
+
+
+
+
+        <div className="FIR-form-control  FIR-add-pre-sub2"><span className="FIR-simp-text">(iii)</span>
+          <label for="inputZip" className="FIR-one-line FIR-form-label FIR-small-label">*Other Acts & Sections</label>
+          <input id="inputZip" className="FIR-form-control2 FIR-zip-input1" name="otherActsAndSections" value={user.otherActsAndSections} onChange={ handleChange } type="text"  />
+        </div>
+
+       </div> */}
 
           {/*  <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SECTION 3 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->*/}
 
           <div>
-            <span className="FIR-simp-text2">3</span>
-
-            <span className="FIR-simp-text3">(a)</span>
+            <span className="FIR-simp-text2">2.</span>
             <div className="FIR-form-control FIR-add-pre-sub">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 *Occurence of Offence:{" "}
               </label>
-            </div>
-
+            </div>{" "}
+            <br></br>
             <div className="FIR-form-control FIR-add-pre-sub3">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 Day
@@ -425,7 +301,6 @@ export default function FIRForm() {
                 type="day"
               />
             </div>
-
             <div className="FIR-form-control FIR-add-pre-sub3">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 Date
@@ -439,7 +314,6 @@ export default function FIRForm() {
                 type="date"
               />
             </div>
-
             <div className="FIR-form-control FIR-add-pre-sub3">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 Time
@@ -453,142 +327,64 @@ export default function FIRForm() {
                 type="time"
               />
             </div>
+            {/* <div className="FIR-">
+          <span className="FIR-simp-text4">(b)</span>
+          <div className="FIR-form-control FIR-add-pre-sub">
+            <label for="inputZip" className="FIR-form-label FIR-small-label">Informatio received at P.S. </label>
+          </div>
 
-            <div className="FIR-">
-              <span className="FIR-simp-text4">(b)</span>
-              <div className="FIR-form-control FIR-add-pre-sub">
-                <label
-                  for="inputZip"
-                  className="FIR-form-label FIR-small-label"
-                >
-                  Informatio received at P.S.{" "}
-                </label>
-              </div>
 
-              <div className="FIR-form-control FIR-add-pre-sub3">
-                <label
-                  for="inputZip"
-                  className="FIR-form-label FIR-small-label"
-                >
-                  Date
-                </label>
-                <input
-                  id="inputZip"
-                  className="FIR-form-control1 FIR-zip-input"
-                  name="informatioReceivedDate"
-                  value={user.informatioReceivedDate}
-                  onChange={handleChange}
-                  type="date"
-                />
-              </div>
+          <div className="FIR-form-control FIR-add-pre-sub3">
+            <label for="inputZip" className="FIR-form-label FIR-small-label">Date</label>
+            <input id="inputZip" className="FIR-form-control1 FIR-zip-input" name="informatioReceivedDate" value={user.informatioReceivedDate} onChange={ handleChange } type="date"  />
+          </div>
 
-              <div className="FIR-form-control FIR-add-pre-sub3">
-                <label
-                  for="inputZip"
-                  className="FIR-form-label FIR-small-label"
-                >
-                  Time
-                </label>
-                <input
-                  id="inputZip"
-                  className="FIR-form-control1 FIR-zip-input"
-                  name="informatioReceivedTime"
-                  value={user.informatioReceivedTime}
-                  onChange={handleChange}
-                  type="time"
-                />
-              </div>
-            </div>
+          <div className="FIR-form-control FIR-add-pre-sub3">
+            <label for="inputZip" className="FIR-form-label FIR-small-label">Time</label>
+            <input id="inputZip" className="FIR-form-control1 FIR-zip-input" name="informatioReceivedTime" value={user.informatioReceivedTime} onChange={ handleChange } type="time" />
+          </div>
+        </div> */}
+            {/* <div className="FIR-">
+                  <span className="FIR-simp-text4">(c)</span>
+                  <div className="FIR-form-control FIR-add-pre-sub">
+                    <label for="inputZip" className="FIR-form-label FIR-small-label">General Diary Reference:  </label>
+                  </div>
 
-            <div className="FIR-">
-              <span className="FIR-simp-text4">(c)</span>
-              <div className="FIR-form-control FIR-add-pre-sub">
-                <label
-                  for="inputZip"
-                  className="FIR-form-label FIR-small-label"
-                >
-                  General Diary Reference:{" "}
-                </label>
-              </div>
 
-              <div className="FIR-form-control FIR-add-pre-sub3">
-                <label
-                  for="inputZip"
-                  className="FIR-form-label FIR-small-label"
-                >
-                  Entry No(s)
-                </label>
-                <input
-                  id="inputZip"
-                  className="FIR-form-control1 FIR-zip-input"
-                  name="diaryReferenceEntryNo"
-                  value={user.diaryReferenceEntryNo}
-                  onChange={handleChange}
-                  type="text"
-                />
-              </div>
+                  <div className="FIR-form-control FIR-add-pre-sub3">
+                    <label for="inputZip" className="FIR-form-label FIR-small-label">Entry No(s)</label>
+                    <input id="inputZip" className="FIR-form-control1 FIR-zip-input" name="diaryReferenceEntryNo" value={user.diaryReferenceEntryNo} onChange={ handleChange } type="text" />
+                  </div>
 
-              <div className="FIR-form-control FIR-add-pre-sub3">
-                <label
-                  for="inputZip"
-                  className="FIR-form-label FIR-small-label"
-                >
-                  Time
-                </label>
-                <input
-                  id="inputZip"
-                  className="FIR-form-control1 FIR-zip-input"
-                  name="diaryReferenceTime"
-                  value={user.diaryReferenceTime}
-                  onChange={handleChange}
-                  type="time"
-                />
-              </div>
-            </div>
+                  <div className="FIR-form-control FIR-add-pre-sub3">
+                    <label for="inputZip" className="FIR-form-label FIR-small-label">Time</label>
+                    <input id="inputZip" className="FIR-form-control1 FIR-zip-input" name="diaryReferenceTime" value={user.diaryReferenceTime} onChange={ handleChange } type="time"  />
+                  </div>
+                </div> */}
           </div>
 
           {/*<!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SECTION 4 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->*/}
 
-          <div className="FIR-">
-            <span className="FIR-simp-text5">4</span>
-            <div className="FIR-form-control FIR-add-pre-sub41">
-              <label for="inputZip" className="FIR-form-label FIR-small-label">
-                Type of Information :{" "}
-              </label>
-            </div>
-
-            <div className="FIR-form-control FIR-add-pre-sub4">
-              <input
-                className="FIR-form-check-input"
-                type="checkbox"
-                id="gridCheck"
-                name="written"
-                value={user.written}
-                onChange={handleChange}
-              />
-              <label for="inputZip" className="FIR-form-label1 FIR-small-label">
-                *Written (or)
-              </label>
-            </div>
-            <div className="FIR-form-control FIR-add-pre-sub4">
-              <input
-                className="FIR-form-check-input"
-                type="checkbox"
-                id="gridCheck"
-                name="oral"
-                value={user.oral}
-                onChange={handleChange}
-              />
-              <label for="inputZip" className="FIR-form-label1 FIR-small-label">
-                Oral
-              </label>
-            </div>
+          {/* <div className="FIR-">
+          <span className="FIR-simp-text5">4</span>
+          <div className="FIR-form-control FIR-add-pre-sub41">
+            <label for="inputZip" className="FIR-form-label FIR-small-label">Type of Information : </label>
           </div>
+
+          <div className="FIR-form-control FIR-add-pre-sub4">
+            <input className="FIR-form-check-input" type="checkbox" id="gridCheck" name="written" value={user.written} onChange={ handleChange }/>
+            <label for="inputZip" className="FIR-form-label1 FIR-small-label">*Written (or)</label>
+          </div>
+          <div className="FIR-form-control FIR-add-pre-sub4">
+            <input className="FIR-form-check-input" type="checkbox" id="gridCheck" name="oral" value={user.oral} onChange={ handleChange }/>
+            <label for="inputZip" className="FIR-form-label1 FIR-small-label">Oral</label>
+          </div>
+        </div> */}
 
           {/*<!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SECTION 5 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->*/}
 
           <div className="FIR-">
-            <span className="FIR-simp-text5">5</span>
+            <span className="FIR-simp-text5">3.</span>
             <div className="FIR-form-control FIR-add-pre-sub51">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 Place of Occurrence:{" "}
@@ -662,7 +458,7 @@ export default function FIRForm() {
           {/*  <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SECTION 6s >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->*/}
 
           <div className="FIR-">
-            <span className="FIR-simp-text5">6</span>
+            <span className="FIR-simp-text5">4.</span>
             <div className="FIR-form-control FIR-add-pre-sub51">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 Complainant / Information
@@ -822,7 +618,7 @@ export default function FIRForm() {
             <div className="FIR-form-control FIR-add-pre-sublast">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 {" "}
-                <span className="FIR-simp-text5">7</span>Details of known /
+                <span className="FIR-simp-text5">5.</span>Details of known /
                 suspected / unknown / accused with full particulars (Attach
                 separate sheet if necessary):
               </label>
@@ -845,8 +641,7 @@ export default function FIRForm() {
             <div className="FIR-form-control FIR-add-pre-sublast">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 {" "}
-                <span className="FIR-simp-text5">8</span>Reasons for delay in
-                reporting by the complaint / Informant:
+                <span className="FIR-simp-text5">6.</span>Detail about Crime
               </label>
             </div>
             <div className="FIR-form-control ">
@@ -855,8 +650,8 @@ export default function FIRForm() {
                 rows="8"
                 cols="80"
                 id="inputAddress"
-                name="reasonsforDelay"
-                value={user.reasonsforDelay}
+                name="detailsOfCrime"
+                value={user.detailsOfCrime}
                 onChange={handleChange}
                 placeholder="Enter brief detail here..."
               ></textarea>
@@ -866,7 +661,7 @@ export default function FIRForm() {
             <div className="FIR-form-control FIR-add-pre-sublast">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
                 {" "}
-                <span className="FIR-simp-text5">9</span>Particulars of
+                <span className="FIR-simp-text5">7.</span>Particulars of
                 properties stolen / involved (Attach separate sheet if
                 necessary):
               </label>

@@ -28,12 +28,9 @@ export default function App() {
         />
         <Route path="/AdminSignUP" element={<AdminsignUP />} />
         <Route path="/FIRform" element={<FIRform />} />
-        <Route path="/FIRGuide" element={<FIRGuide />} />
-        <Route
-          path="/FIROverviewComponent"
-          element={<FIROverviewComponent />}
-        />
-        {/* <Route  path="/ForgetPassOTP"  element={<ForgetPassOTP/>} /> */}
+        {/* <Route  path="/FIRGuide"  element={<FIRGuide/>} />
+          <Route  path="/FIROverviewComponent"  element={<FIROverviewComponent/>} />
+          <Route  path="/ForgetPassOTP"  element={<ForgetPassOTP/>} /> */}
       </Routes>
 
       {/* <LandingPage/>
