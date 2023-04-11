@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "./FIRformstyle.css";
 import Navbar from "../Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function FIRForm() {
   let url = "../adminSignUP/AdminSignUP";
 
-  const history = useNavigate();
-
+  const { state } = useLocation();
+  console.log(state);
+  const { email } = state;
   const [user, setUser] = useState({
     state: "",
     district: "",
@@ -37,6 +38,8 @@ export default function FIRForm() {
     directionAndDistncefromPS: "",
     beatNo: "",
     address: "",
+    crimeState: "",
+    crimeDistrict: "",
     outsideNameofPSAndDistrict: "",
 
     complainantName: "",
@@ -48,7 +51,7 @@ export default function FIRForm() {
     complainantDateofIssue: "",
     complainantPlaceOfIssue: "",
     complainantAddress: "",
-
+    complainantAadharNo: "",
     detailsOfSuspected: "",
     detailsOfCrime: "",
     particularsOfPropertiesStolenInvolved: "",
@@ -73,6 +76,8 @@ export default function FIRForm() {
       informatioReceivedTime,
       directionAndDistncefromPS,
       beatNo,
+      crimeDistrict,
+      crimeState,
       address,
       outsideNameofPSAndDistrict,
       complainantName,
@@ -83,9 +88,11 @@ export default function FIRForm() {
       complainantPassportNo,
       complainantDateofIssue,
       complainantPlaceOfIssue,
+      complainantAadharNo,
       complainantAddress,
       detailsOfSuspected,
       detailsOfCrime,
+
       particularsOfPropertiesStolenInvolved,
     } = user;
 
@@ -98,6 +105,8 @@ export default function FIRForm() {
       occurenceTime &&
       directionAndDistncefromPS &&
       beatNo &&
+      crimeDistrict &&
+      crimeState &&
       address &&
       complainantName &&
       complainantFatherorHusbandName &&
@@ -105,13 +114,18 @@ export default function FIRForm() {
       complainantNationality &&
       complainantOccupation &&
       complainantPassportNo &&
+      complainantAadharNo &&
       complainantPlaceOfIssue &&
       complainantAddress &&
       detailsOfSuspected &&
       detailsOfCrime &&
       particularsOfPropertiesStolenInvolved
     ) {
-      console.log(user);
+      const data = {
+        ...user,
+        userEmail: email,
+      };
+      console.log(data);
       //     axios.post("http://localhost:9002/FIRform", user)
       //     .then( res => {
       //         alert(res.data.message)
@@ -418,6 +432,32 @@ export default function FIRForm() {
                 type="text"
               />
             </div>
+            <div className="FIR-form-control FIR-add-pre-sub5">
+              <label for="inputZip" className="FIR-form-label FIR-small-label">
+                District
+              </label>
+              <input
+                id="inputZip"
+                className="FIR-form-control1 FIR-zip-input"
+                name="crimeDistrict"
+                value={user.crimeDistrict}
+                onChange={handleChange}
+                type="text"
+              />
+            </div>
+            <div className="FIR-form-control FIR-add-pre-sub5">
+              <label for="inputZip" className="FIR-form-label FIR-small-label">
+                State
+              </label>
+              <input
+                id="inputZip"
+                className="FIR-form-control1 FIR-zip-input"
+                name="crimeState"
+                value={user.crimeState}
+                onChange={handleChange}
+                type="text"
+              />
+            </div>
           </div>
 
           <div className="FIR-addr-text-main">
@@ -485,6 +525,21 @@ export default function FIRForm() {
           <div className="FIR-form-control FIR-form-control6">
             <span className="FIR-simp-text3">(b)</span>
             <label for="Name" className="FIR-desc-label">
+              Aadhar Number
+            </label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter Aadhar number "
+              name="complainantAadharNo"
+              value={user.complainantAadharNo}
+              onChange={handleChange}
+            />
+            <small>Error message</small>
+          </div>
+          <div className="FIR-form-control FIR-form-control6">
+            <span className="FIR-simp-text3">(c)</span>
+            <label for="Name" className="FIR-desc-label">
               Father's/Husband's Name
             </label>
             <input
@@ -500,7 +555,7 @@ export default function FIRForm() {
           <div className="FIR-">
             <div className="FIR-form-control FIR-add-pre-sub">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
-                <span className="FIR-simp-text8">(c)</span>Date Of Birth{" "}
+                <span className="FIR-simp-text8">(d)</span>Date Of Birth{" "}
               </label>
               <input
                 id="inputZip"
@@ -514,7 +569,7 @@ export default function FIRForm() {
 
             <div className="FIR-form-control FIR-add-pre-sub3">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
-                <span className="FIR-simp-text8">(d)</span>Nationality
+                <span className="FIR-simp-text8">(e)</span>Nationality
               </label>
               <input
                 id="inputZip"
@@ -528,7 +583,7 @@ export default function FIRForm() {
 
             <div className="FIR-form-control FIR-add-pre-sub3">
               <label for="inputZip" className="FIR-form-label FIR-small-label">
-                <span className="FIR-simp-text8">(e)</span>Occupation
+                <span className="FIR-simp-text8">(f)</span>Occupation
               </label>
               <input
                 id="inputZip"
@@ -546,7 +601,7 @@ export default function FIRForm() {
                   for="inputZip"
                   className="FIR-form-label FIR-small-label"
                 >
-                  <span className="FIR-simp-text8">(f)</span>Passport No.{" "}
+                  <span className="FIR-simp-text8">(g)</span>Passport No.{" "}
                 </label>
                 <input
                   id="inputZip"
