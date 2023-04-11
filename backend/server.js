@@ -3,31 +3,23 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
-const path=require("path")
+const passport = require("passport");
+const path = require("path");
 dotenv.config({ path: "./config.env" });
-const PORT = process.env.PORT || 5000;
-const cors=require("cors");
-
-
-
-
+const PORT = process.env.PORT;
+const cors = require("cors");
 
 require("./db/conn");
-
+app.use(passport.initialize());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors())
+app.use(cors());
 
 app.use(require("./routes/user"));
 
-
 // import cors from "cors"
-
-
-
-
 
 // import express from "express"
 
@@ -52,11 +44,7 @@ app.use(require("./routes/user"));
 //   res.send("My-API");
 // })
 
-
-
 /////////////////////////////////////////////   REGISTER-LOGIN SERVER  SIDE  //////////////////////////////////////////////////////////
-
-
 
 // const userSchema = new mongoose.Schema({
 //     name: String,
@@ -66,7 +54,6 @@ app.use(require("./routes/user"));
 // })
 
 // const User = new mongoose.model("User", userSchema)
-
 
 // Post Routes
 // app.post("/AdminLogin", (req, res)=> {
@@ -85,7 +72,6 @@ app.use(require("./routes/user"));
 //         }
 //     })
 // })
-
 
 // // app.post("/AdminSignUP", (req, res)=> {
 // //   console.log(req.body);
@@ -114,10 +100,6 @@ app.use(require("./routes/user"));
 // // })
 
 // ////////////////////////////////////////////////////////    END     //////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 // /////////////////////////////////////////////   FIR FORM SERVER  SIDE  //////////////////////////////////////////////////////////
 
@@ -167,12 +149,7 @@ app.use(require("./routes/user"));
 //   particularsOfPropertiesStolenInvolved: String
 // })
 
-
-
 // const FIRUser = new mongoose.model("FIRUser", fIRSchema)
-
-
-
 
 // app.post("/FIRform", (req, res)=> {
 //   console.log(req.body);
@@ -242,8 +219,6 @@ app.use(require("./routes/user"));
 
 /////////////////////////////////////////////////////////  END   /////////////////////////////////////////////////////////////////
 
-
-
-app.listen(process.env.PORT,() => {
-    console.log(`${process.env.PORT} started`)
-})
+app.listen(process.env.PORT, () => {
+  console.log(`${process.env.PORT} started`);
+});

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 
 const User = new mongoose.Schema({
-  userName: {
+  aadharNo: {
     type: String,
     required: true,
   },
@@ -21,7 +21,7 @@ const User = new mongoose.Schema({
   },
   userType: {
     type: String,
-    enum: ["citizen", "policeMen"],
+    enum: ["citizen", "policeMen", "headOfficer"],
     default: "citizen",
   },
   password: {
