@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use(require("./routes/user"));
+app.use(require("./routes/fir"));
 
 // import cors from "cors"
 

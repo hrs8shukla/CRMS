@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const moment = require("moment");
-
 const User = new mongoose.Schema({
   aadharNo: {
     type: String,

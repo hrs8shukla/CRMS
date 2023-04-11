@@ -11,12 +11,9 @@ module.exports = {
           jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         },
         function (jwt_payload, cb) {
-          // console.log("hello",jwt_payload);
-
           User.findById({ _id: jwt_payload.id })
             .then(function (user) {
               if (user) {
-                // console.log("jwt passport",user)
                 return cb(null, user);
               } else return cb(null, false);
             })
