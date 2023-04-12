@@ -1,0 +1,19 @@
+
+.container-bg{
+    background-image: url("../images/policebg.jpg");
+    object-fit: cover;
+   
+    width: 100vw;
+    overflow: scroll;
+}
+
+.cards{
+    margin: 20px;
+    padding: 10px;
+}
+.card-title{
+    color: black;
+}
+.card-body{
+    height: fit-content;
+}

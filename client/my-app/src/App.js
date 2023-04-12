@@ -10,6 +10,7 @@ import FIROverviewComponent from "./FIROverviewComponent/FirOverviewComponent";
 import ForgetPassOTP from "./ForgetPass/ForgetPassOTP";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import FirDetails from "./police/FirDetails";
 
 export default function App() {
   const [user, setLoginUser] = useState({});
@@ -28,9 +29,12 @@ export default function App() {
         />
         <Route path="/AdminSignUP" element={<AdminsignUP />} />
         <Route path="/FIRform" element={<FIRform />} />
-        {/* <Route  path="/FIRGuide"  element={<FIRGuide/>} />
+        <Route path="/policeFirDetails" element={<FirDetails />} />
+        <Route path="/Footer" element={<Footer />} />
+        
+        <Route  path="/FIRGuide"  element={<FIRGuide/>} />
           <Route  path="/FIROverviewComponent"  element={<FIROverviewComponent/>} />
-          <Route  path="/ForgetPassOTP"  element={<ForgetPassOTP/>} /> */}
+          <Route  path="/ForgetPassOTP"  element={<ForgetPassOTP/>} />
       </Routes>
 
       {/* <LandingPage/>

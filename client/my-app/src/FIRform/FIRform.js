@@ -6,10 +6,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export default function FIRForm() {
   let url = "../adminSignUP/AdminSignUP";
-
+ const navigate = useNavigate();
   const { state } = useLocation();
   console.log(state);
-  const { email } = state;
+  const { userId, } = state;
   const [user, setUser] = useState({
     state: "",
     district: "",
@@ -126,15 +126,13 @@ export default function FIRForm() {
     ) {
       const data = {
         ...user,
-        userEmail: email,
+        userId: userId,
       };
       console.log(data);
-      //     axios.post("http://localhost:9002/FIRform", user)
-      //     .then( res => {
-      //         alert(res.data.message)
-      //         history.push("/Footer")
-      //     })
-      // }
+     axios.post("http://localhost:9002/firRegister", data).then((res) => {
+       alert(res.data.message);
+       navigate("/Footer");
+     });
     } else {
       alert("invalid input");
     }

@@ -25,12 +25,18 @@ export default function AdminSignUP() {
     });
   };
 
-  const verifyAadharHandler = () =>{
-    axios.post(
+  const verifyAadharHandler = async () =>{
+    const response = await fetch(
       `https://l669o4p4p3.execute-api.us-east-1.amazonaws.com/dev/number?number=${user.aadharNo}`
-    ).then(res=>{
+    );
+    console.log(response);
+      const res = await response.json();
       console.log(res);
-    }).catch(err=>console.log(err));
+    // axios.post(
+    //   `https://l669o4p4p3.execute-api.us-east-1.amazonaws.com/dev/number?number=${user.aadharNo}`
+    // ).then(res=>{
+    //   console.log(res);
+    // }).catch(err=>console.log(err));
   } 
 
   const AdminSignUP = () => {
@@ -45,14 +51,16 @@ export default function AdminSignUP() {
       chk_exp.test(aadharNo) &&
       password
     ) {
-      history("/AdminLogin");
-      // axios.post("http://localhost:9002/AdminSignUP", user)
-      // .then( res => {
-      //     alert(res.data.message)
-      //     history.push("/AdminLogin")
-      // }).catch(err=>{
-      //   alert(err);
-      // })
+      // history("/AdminLogin");
+      axios
+        .post("http://localhost:9002/AdminSignUP", user)
+        .then((res) => {
+          alert(res.data.message);
+          history("/AdminLogin");
+        })
+        .catch((err) => {
+          alert(err);
+        });
     } else {
       alert("invalid input");
     }
@@ -104,7 +112,7 @@ export default function AdminSignUP() {
               onChange={handleChange}
               type="text"
               id="userid"
-              placeholder="Enter userid"
+              placeholder="Enter aadhar no"
             />
             <small>Error message</small>
           </div>
