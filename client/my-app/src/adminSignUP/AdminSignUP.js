@@ -25,6 +25,14 @@ export default function AdminSignUP() {
     });
   };
 
+  const verifyAadharHandler = () =>{
+    axios.post(
+      `https://l669o4p4p3.execute-api.us-east-1.amazonaws.com/dev/number?number=${user.aadharNo}`
+    ).then(res=>{
+      console.log(res);
+    }).catch(err=>console.log(err));
+  } 
+
   const AdminSignUP = () => {
     console.log(user);
     const { firstName, lastName, email, password, aadharNo } = user;
@@ -99,6 +107,9 @@ export default function AdminSignUP() {
               placeholder="Enter userid"
             />
             <small>Error message</small>
+          </div>
+          <div className="button" onClick={verifyAadharHandler}>
+            Verify Aadhar
           </div>
           <div className="form-control signup-form-control">
             <label for="email">Email</label>

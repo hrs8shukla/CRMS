@@ -40,6 +40,8 @@ export default function FIRForm() {
     address: "",
     crimeState: "",
     crimeDistrict: "",
+    crimeColony: "",
+    crimePinCode: "",
     outsideNameofPSAndDistrict: "",
 
     complainantName: "",
@@ -78,7 +80,8 @@ export default function FIRForm() {
       beatNo,
       crimeDistrict,
       crimeState,
-      address,
+      crimeColony,
+      crimePinCode,
       outsideNameofPSAndDistrict,
       complainantName,
       complainantFatherorHusbandName,
@@ -107,7 +110,7 @@ export default function FIRForm() {
       beatNo &&
       crimeDistrict &&
       crimeState &&
-      address &&
+      crimeColony && crimePinCode &&
       complainantName &&
       complainantFatherorHusbandName &&
       complainantDateOfBirth &&
@@ -454,6 +457,32 @@ export default function FIRForm() {
                 className="FIR-form-control1 FIR-zip-input"
                 name="crimeState"
                 value={user.crimeState}
+                onChange={handleChange}
+                type="text"
+              />
+            </div>
+            <div className="FIR-form-control FIR-add-pre-sub5">
+              <label for="inputZip" className="FIR-form-label FIR-small-label">
+                Colony/Area
+              </label>
+              <input
+                id="inputZip"
+                className="FIR-form-control1 FIR-zip-input"
+                name="crimeColony"
+                value={user.crimeColony}
+                onChange={handleChange}
+                type="text"
+              />
+            </div>
+            <div className="FIR-form-control FIR-add-pre-sub5">
+              <label for="inputZip" className="FIR-form-label FIR-small-label">
+                Pin Code
+              </label>
+              <input
+                id="inputZip"
+                className="FIR-form-control1 FIR-zip-input"
+                name="crimePinCode"
+                value={user.crimePinCode}
                 onChange={handleChange}
                 type="text"
               />
