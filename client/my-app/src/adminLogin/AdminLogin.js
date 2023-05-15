@@ -31,6 +31,8 @@ export default function Adminlogin({ setLoginUser }) {
         };
         if (userId.userType === "citizen")
           navigate("/FIRForm", { state: userId });
+          else if(userId.userType=== "headOfficer")
+          navigate("/superadmin");
         else navigate("/policeFirDetails");
       })
       .catch((err) => {
@@ -49,6 +51,7 @@ export default function Adminlogin({ setLoginUser }) {
   return (
     <>
       <Navbar isLogIn={isLogIn} />
+      <div className="login-super-container">
       <div className="log-container ">
         <form id="form" className="log-form">
           <a href="/AdminSignUP" className="log-sign">
@@ -59,14 +62,14 @@ export default function Adminlogin({ setLoginUser }) {
           </a>
           <hr className="log-center-ball" />
           <div className="log-form-control form-control">
-            <label for="username">User ID</label>
+            <label for="username">Email ID</label>
             <input
               name="email"
               value={user.email}
               onChange={handleChange}
               type="text"
               id="userid"
-              placeholder="Enter userid"
+              placeholder="Enter email id"
             />
             <small>Error message</small>
           </div>
@@ -91,7 +94,7 @@ export default function Adminlogin({ setLoginUser }) {
           </a>
         </form>
       </div>
-
+    </div>
       <div class="align-items-center ">
         <p class="mb-0">
           &copy; 2022 - 2023 | All Rights Reserved - Pallavi Kumari

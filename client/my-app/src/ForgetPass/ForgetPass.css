@@ -17,7 +17,7 @@
   box-sizing: border-box;
 }
 
-body {
+.log-super-container {
   font-family: 'Lora', 'Times New Roman', serif;
   background-color: var(--bg-color);
   color: var(--free);

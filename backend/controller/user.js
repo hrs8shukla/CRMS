@@ -15,17 +15,8 @@ module.exports = {
         reEnterPassword,
         lastName,
       } = req.body;
-      if (
-        !aadharNo ||
-        !email ||
-        !password ||
-        !firstName ||
-        !lastName ||
-        !reEnterPassword
-      ) {
+      if (!aadharNo || !email || !password || !firstName || !lastName) {
         return res.status(401).json({ message: "plz fill all fields" });
-      } else if (password != reEnterPassword) {
-        return res.status(401).json({ message: "password not matching" });
       } else {
         const isUserExist = await User.findOne({ email });
 

@@ -31,7 +31,7 @@ h5 {
   scroll-behavior: smooth;
 }
 
-body {
+.fir-super-container {
   font-family: 'Lora', 'Times New Roman', serif;
   background-color: var(--bg-color);
   color: var(--free);

@@ -8,22 +8,41 @@ module.exports = {
     var fir = new Fir({
       userId: body.userId,
       beatNo: body.beatNo,
-      "complaintUser.address": body,
-      "complaintUser.dob": body,
-      "complaintUser.name": body,
-      "complaintUser.aadharNo": body,
-      "complaintUser.nationality": body,
-      "complaintUser.occupation": body,
-      "crimeDetails.crime": body,
-      "crimeDetails.suspected": body,
-      "crimeDetails.district": body,
-      "crimeDetails.date": body,
-      "crimeDetails.time": body,
-      "crimeDetails.day": body,
-      "crimeDetails.state": body,
-      "crimeDetails.address": body,
+      "complaintUser.address": body.complainantAddress,
+      "complaintUser.dob": body.complainantDateOfBirth,
+      "complaintUser.name": body.complainantName,
+      "complaintUser.aadharNo": body.complainantAadharNo,
+      "complaintUser.nationality": body.complainantNationality,
+      "complaintUser.occupation": body.complainantOccupation,
+      "crimeDetails.crime": body.detailsOfCrime,
+      "crimeDetails.suspected": body.detailsOfSuspected,
+      "crimeDetails.district": body.crimeDistrict,
+      "crimeDetails.date": body.occurenceDate,
+      "crimeDetails.time": body.occurenceTime,
+      "crimeDetails.day": body.occurenceDay,
+      "crimeDetails.state": body.crimeState,
+      "crimeDetails.address": body.complainantAddress,
+      "crimeDetails.colony": body.crimeColony,
+      "crimeDetails.pinCode": body.crimePinCode,
     });
 
-    console.log(fir);
+    fir
+      .save()
+      .then(function (result) {
+        return res.send({ message: "fir created" });
+      })
+      .catch(function (err) {
+        console.log(err);
+        return res.status(401).send({ message: "error" });
+      });
+  },
+  getFirs: function (req, res) {
+    Fir.find({})
+      .then((result) => {
+        return res.send(result);
+      })
+      .catch((err) => {
+        return res.status(500).send({ message: "internal server error" });
+      });
   },
 };

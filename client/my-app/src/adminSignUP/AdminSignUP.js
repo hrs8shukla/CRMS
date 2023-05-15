@@ -70,85 +70,87 @@ export default function AdminSignUP() {
 
   return (
     <>
-      <Navbar />
-      <div className="signup-container">
-        <form id="form" className="signup-form">
-          <a href="/AdminSignUP" className="signup-sign" id="sign-id">
-            <h2>SIGN UP!</h2>
-          </a>
-          <a href="/AdminLogin" className="signup-log" id="log-id">
-            <h2>LOGIN!</h2>
-          </a>
-          <hr className="signup-center-ball" />
-          <div className="signup-form-control signup-form-control">
-            <label for="Name">First Name</label>
-            <input
-              name="firstName"
-              value={user.firstName}
-              onChange={handleChange}
-              type="text"
-              id="name"
-              placeholder="Enter your first name"
-            />
-            <small>Error message</small>
-          </div>
-          <div className="signup-form-control signup-form-control">
-            <label for="Name">Last Name</label>
-            <input
-              name="lastName"
-              value={user.lastName}
-              onChange={handleChange}
-              type="text"
-              id="name"
-              placeholder="Enter your first name"
-            />
-            <small>Error message</small>
-          </div>
-          <div className="form-control signup-form-control">
-            <label for="username">Aadhar Card No</label>
-            <input
-              name="aadharNo"
-              value={user.aadharNo}
-              onChange={handleChange}
-              type="text"
-              id="userid"
-              placeholder="Enter aadhar no"
-            />
-            <small>Error message</small>
-          </div>
-          <div className="button" onClick={verifyAadharHandler}>
-            Verify Aadhar
-          </div>
-          <div className="form-control signup-form-control">
-            <label for="email">Email</label>
-            <input
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              type="text"
-              id="email"
-              placeholder="Enter email"
-            />
-            <small>Error message</small>
-          </div>
-          <div className="form-control signup-form-control">
-            <label for="password">Password</label>
-            <input
-              name="password"
-              value={user.password}
-              onChange={handleChange}
-              type="password"
-              id="password"
-              placeholder="Enter password"
-            />
-            <small>Error message</small>
-          </div>
+      <div className="signup-super-container">
+        <Navbar />
+        <div className="signup-container">
+          <form id="form" className="signup-form">
+            <a href="/AdminSignUP" className="signup-sign" id="sign-id">
+              <h2>SIGN UP!</h2>
+            </a>
+            <a href="/AdminLogin" className="signup-log" id="log-id">
+              <h2>LOGIN!</h2>
+            </a>
+            <hr className="signup-center-ball" />
+            <div className="signup-form-control signup-form-control">
+              <label for="Name">First Name</label>
+              <input
+                name="firstName"
+                value={user.firstName}
+                onChange={handleChange}
+                type="text"
+                id="name"
+                placeholder="Enter your first name"
+              />
+              <small>Error message</small>
+            </div>
+            <div className="signup-form-control signup-form-control">
+              <label for="Name">Last Name</label>
+              <input
+                name="lastName"
+                value={user.lastName}
+                onChange={handleChange}
+                type="text"
+                id="name"
+                placeholder="Enter your first name"
+              />
+              <small>Error message</small>
+            </div>
+            <div className="form-control signup-form-control">
+              <label for="username">Aadhar Card No</label>
+              <input
+                name="aadharNo"
+                value={user.aadharNo}
+                onChange={handleChange}
+                type="text"
+                id="userid"
+                placeholder="Enter aadhar no"
+              />
+              <small>Error message</small>
+            </div>
+            <div className="button" onClick={verifyAadharHandler}>
+              Verify Aadhar
+            </div>
+            <div className="form-control signup-form-control">
+              <label for="email">Email</label>
+              <input
+                name="email"
+                value={user.email}
+                onChange={handleChange}
+                type="text"
+                id="email"
+                placeholder="Enter email"
+              />
+              <small>Error message</small>
+            </div>
+            <div className="form-control signup-form-control">
+              <label for="password">Password</label>
+              <input
+                name="password"
+                value={user.password}
+                onChange={handleChange}
+                type="password"
+                id="password"
+                placeholder="Enter password"
+              />
+              <small>Error message</small>
+            </div>
 
-          {/*  <button type="submit" onClick={AdminSignUP}>SIGN UP</button>*/}
-          <div className="button" onClick={AdminSignUP}>
-            SIGN UP
-          </div>
-        </form>
+            {/*  <button type="submit" onClick={AdminSignUP}>SIGN UP</button>*/}
+            <div className="button" onClick={AdminSignUP}>
+              SIGN UP
+            </div>
+          </form>
+        </div>
       </div>
       <div class="align-items-center ">
         <p class="mb-0">

@@ -11,6 +11,7 @@ import ForgetPassOTP from "./ForgetPass/ForgetPassOTP";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import FirDetails from "./police/FirDetails";
+import Superadmin from "./superAdmin/Superadmin";
 
 export default function App() {
   const [user, setLoginUser] = useState({});
@@ -19,6 +20,7 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/superadmin" element={<Superadmin />} />
         {/* <Route exact path="/FIRForm" element=
             {
                  user, user._id ? <FIRform setLoginUser={setLoginUser}/> : <Adminlogin setLoginUser={setLoginUser}/>

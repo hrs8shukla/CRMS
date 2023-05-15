@@ -4,11 +4,15 @@ const Fir = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
     },
     beatNo: {
       type: String,
       required: true,
+    },
+    status: {
+      type: String,
+      enum: ["pending", "approved", "reject", "hold"],
+      default: "pending",
     },
     complaintUser: {
       address: {
@@ -59,9 +63,15 @@ const Fir = new mongoose.Schema(
       address: {
         type: String,
       },
+      colony: {
+        type: String,
+      },
+      pinCode: {
+        type: String,
+      },
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", Fir);
+module.exports = mongoose.model("Fir", Fir);
