@@ -33,6 +33,9 @@ export default function Adminlogin({ setLoginUser }) {
           navigate("/FIRForm", { state: userId });
           else if(userId.userType=== "headOfficer")
           navigate("/superadmin");
+          else if(userId.userType=== "policeMen")
+          navigate("/policeofficer", { state: userId });
+
         else navigate("/policeFirDetails");
       })
       .catch((err) => {

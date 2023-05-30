@@ -19,6 +19,7 @@ app.use(cors());
 
 app.use(require("./routes/user"));
 app.use(require("./routes/fir"));
+app.use(require("./routes/headOfficer"));
 
 // import cors from "cors"
 

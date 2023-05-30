@@ -12,6 +12,9 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import FirDetails from "./police/FirDetails";
 import Superadmin from "./superAdmin/Superadmin";
+import Adminfirs from "./AdminFirs/Adminfirs";
+import Firdetail from "./adminFirDetails/Firdetail";
+import PoliceOfficer from "./PoliceOfficer/PoliceOfficer";
 
 export default function App() {
   const [user, setLoginUser] = useState({});
@@ -21,10 +24,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/superadmin" element={<Superadmin />} />
-        {/* <Route exact path="/FIRForm" element=
-            {
-                 user, user._id ? <FIRform setLoginUser={setLoginUser}/> : <Adminlogin setLoginUser={setLoginUser}/>
-            } /> */}
+        <Route path="/totalfirs" element={<Adminfirs />} />
+        <Route path="/getFirById/:id" element={<Firdetail />} />
+        <Route path="/policeofficer" element={<PoliceOfficer />} />
+       
         <Route
           path="/AdminLogin"
           element={<Adminlogin setLoginUser={setLoginUser} />}
@@ -33,10 +36,13 @@ export default function App() {
         <Route path="/FIRform" element={<FIRform />} />
         <Route path="/policeFirDetails" element={<FirDetails />} />
         <Route path="/Footer" element={<Footer />} />
-        
-        <Route  path="/FIRGuide"  element={<FIRGuide/>} />
-          <Route  path="/FIROverviewComponent"  element={<FIROverviewComponent/>} />
-          <Route  path="/ForgetPassOTP"  element={<ForgetPassOTP/>} />
+
+        <Route path="/FIRGuide" element={<FIRGuide />} />
+        <Route
+          path="/FIROverviewComponent"
+          element={<FIROverviewComponent />}
+        />
+        <Route path="/ForgetPassOTP" element={<ForgetPassOTP />} />
       </Routes>
 
       {/* <LandingPage/>

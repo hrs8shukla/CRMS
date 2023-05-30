@@ -21,7 +21,6 @@ module.exports = {
       "crimeDetails.time": body.occurenceTime,
       "crimeDetails.day": body.occurenceDay,
       "crimeDetails.state": body.crimeState,
-      "crimeDetails.address": body.complainantAddress,
       "crimeDetails.colony": body.crimeColony,
       "crimeDetails.pinCode": body.crimePinCode,
     });
@@ -44,5 +43,43 @@ module.exports = {
       .catch((err) => {
         return res.status(500).send({ message: "internal server error" });
       });
+  },
+  getFirsByPoliceMenId: function (req, res) {
+    var policeMenId = req.params.id;
+    // console.log(req.para)
+    console.log(policeMenId);
+    Fir.find({ policeMenId: policeMenId })
+      .then((result) => {
+        return res.status(200).send(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).send({ message: "internal server error" });
+      });
+  },
+  getFirById: async (req, res) => {
+    try {
+      var firId = req.params.id;
+      var result = await Fir.findById({ _id: firId });
+      return res.status(200).send(result);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send({ message: "pls try later server error" });
+    }
+  },
+  updateFirStatus: async (req, res) => {
+    try {
+      var updatedStatus = req.body.status;
+      var firId = req.body.id;
+      var isUpdated = await Fir.updateOne(
+        { _id: firId },
+        { status: updatedStatus }
+      );
+      console.log(isUpdated);
+      return res.status(200).send({ message: "status updated" });
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send({ message: "pls try later server error" });
+    }
   },
 };

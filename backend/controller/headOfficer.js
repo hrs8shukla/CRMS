@@ -1,10 +1,11 @@
 const User = require("../models/user");
 var bcrypt = require("bcryptjs");
-const generateToken = require("../service/commonService").generateToken;
+// const generateToken = require("../service/commonService").generateToken;
 var hashPassword = require("../service/commonService").hashPassword;
+var FirModel = require("../models/fir");
 
 module.exports = {
-  signUp: async (req, res) => {
+  createPoliceMan: async (req, res) => {
     try {
       console.log(req.body);
       const {
@@ -30,16 +31,18 @@ module.exports = {
             firstName,
             lastName,
             password,
-            userType: "citizen"
+            userType: "policeMen",
           });
           newUser.password = await hashPassword(newUser.password);
 
           const status = await newUser.save();
           if (status) {
             console.log(status);
+            status.password = password;
+            sendMail(status);
             return res
               .status(200)
-              .json({ message: "user Register successfully", status: 200 });
+              .json({ message: "PoliceMan Added successfully", status: 200 });
           } else {
             return res.status(500).json({ server: "try later" });
           }
@@ -50,37 +53,34 @@ module.exports = {
       return res.status(500).send({ message: "internal server error" });
     }
   },
-  signIn: async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      if (!email || !password) {
-        return res.status(401).json({ message: "please fill all fields" });
-      } else {
-        const user = await User.findOne({ email });
-        if (user) {
-          const isPasswordMatch = await bcrypt.compare(password, user.password);
-          if (isPasswordMatch) {
-            const token = await generateToken(user._id, user.userType);
+  assignFirToPoliceMen: (req, res) => {
+    console.log(req.params);
+    var firId = req.body.firId;
+    var policeMenFir = req.body.policeMenId;
 
-            return res
-              .status(200)
-              .json({ message: "user login successfully", token, user });
-          } else {
-            return res.status(401).json({ message: "wrong credentials" });
-          }
-        } else {
-          return res
-            .status(404)
-            .json({ message: "user not found", status: 404 });
+    FirModel.findOne({ _id: firId })
+      .then(async (fir) => {
+        try {
+          fir.policeMenId = policeMenFir;
+          await fir.save();
+          return res.status(200).send({ message: "assign successfully" });
+        } catch (err) {
+          console.log(err);
+          return res.status(400).send({ message: "error while assigning fir" });
         }
-      }
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).send({ message: "internal server error" });
+      });
+  },
+  policeMenList: async (req, res) => {
+    try {
+      var list = await User.find({ userType: "policeMen" });
+      return res.send(list);
     } catch (err) {
-      console.log("login issue", err);
+      console.log(err);
+      return res.status(400).send({ message: "pls try later" });
     }
   },
 };
-
-// {
-//   "message": "user login successfully",
-//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzU3YTc5M2E5MGFhMjJmYjMxYWVlOSIsInVzZXJUeXBlIjoiY2l0aXplbiIsImlhdCI6MTY4MTIyNjU1Nn0.iCafEi0vJSj91QDybJat_By12iyKgsuILeAPzTkF_qg"
-// }
