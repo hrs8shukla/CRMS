@@ -3,7 +3,7 @@ import "./logStyle.css";
 import axios from "axios";
 import Navbar from "../Navbar";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 export default function Adminlogin({ setLoginUser }) {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -28,18 +28,39 @@ export default function Adminlogin({ setLoginUser }) {
         const userId = {
           userId: res.data.user._id,
           userType: res.data.user.userType,
+         
         };
+        const policeUser = {
+          userId: res.data.user._id,
+          userType: res.data.user.userType,
+          userDetail: res.data.user
+        }
+        localStorage.setItem("isLogged",true);
+        localStorage.setItem("userId", res.data.user._id)
         if (userId.userType === "citizen")
           navigate("/FIRForm", { state: userId });
           else if(userId.userType=== "headOfficer")
           navigate("/superadmin");
-          else if(userId.userType=== "policeMen")
-          navigate("/policeofficer", { state: userId });
+          else if(userId.userType=== "policeMen"){
+            localStorage.setItem("userId",userId);
+            navigate("/policeofficer", { state: policeUser });
+          }
 
         else navigate("/policeFirDetails");
       })
       .catch((err) => {
         console.log(err);
+        toast.error(`Invalid Credentials`,{
+          position:"top-center",
+          autoClose:3000,
+          hideProgressBar:false,
+          closeOnClick:true,
+          pauseOnHover:true,
+          draggable:true,
+          progress: undefined,
+          theme:"light",
+          containerStyle: { width: '500px' }
+        });
       });
 
     // navigate("/FIRForm",{state : user});

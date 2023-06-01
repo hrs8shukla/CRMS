@@ -3,7 +3,7 @@ import MapComponent from "../MapContainer/MapComponent";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
-import Navbar from "../superAdmin/Navbar";
+import Navbar from "./Navbar";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import "./firdetail.css";
+import "./PoliceFirDetail.css";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -25,9 +25,9 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const Firdetail = () => {
-  const [firData, setFirData] = useState(null);
+const PoliceFirdetail = () => {
   const [optionSelected, setOptionSelected] = useState(null);
+  const [firData, setFirData] = useState(null);
   const [policeOfficerData, setPoliceOfficerData] = useState(null);
   const [updateFirStatus, setUpdateFirStatus] = useState(null);
   const [isButtonActive, setIsButtonActive] = useState(false);
@@ -75,7 +75,6 @@ const Firdetail = () => {
 
   const handleChange = (e) => {
     console.log(e.target.value);
-    setOptionSelected(e.target.value);
     const selectedData = policeOfficerData.find(
       (option) => option._id === e.target.value
     );
@@ -93,55 +92,81 @@ const Firdetail = () => {
   useEffect(() => {
     console.log(updateFirStatus);
   }, [updateFirStatus]);
-  const submitStatusHandler = async () => {
-    console.log(updateFirStatus);
-    await axios
-      .post("http://localhost:9002/assignFirToPoliceMen", updateFirStatus)
-      .then((res) => {
-        console.log(res);
-        toast.success(`Assigned Successfully`,{
-          position:"top-center",
-          autoClose:3000,
-          hideProgressBar:false,
-          closeOnClick:true,
-          pauseOnHover:true,
-          draggable:true,
-          progress: undefined,
-          theme:"light",
-          containerStyle: { width: '500px' }
-        });
-      })
-      .catch((err) => {
-        toast.error(`Assign the policeman first`,{
-          position:"top-center",
-          autoClose:3000,
-          hideProgressBar:false,
-          closeOnClick:true,
-          pauseOnHover:true,
-          draggable:true,
-          progress: undefined,
-          theme:"light",
-          containerStyle: { width: '500px' }
-        });
-        console.log(err);
-      });
+  //   const submitStatusHandler = async () => {
+  //     console.log(updateFirStatus);
+  //     await axios
+  //       .post("http://localhost:9002/assignFirToPoliceMen", updateFirStatus)
+  //       .then((res) => {
+  //         console.log(res);
+  //         toast.success(`Assigned Successfully`,{
+  //           position:"top-center",
+  //           autoClose:3000,
+  //           hideProgressBar:false,
+  //           closeOnClick:true,
+  //           pauseOnHover:true,
+  //           draggable:true,/
+  //           progress: undefined,
+  //           theme:"light",
+  //           containerStyle: { width: '500px' }
+  //         });
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+  const handleSelectChange = (e) => {
+    setOptionSelected(e.target.value);
   };
-  const optionElements = policeOfficerData?.map((officer, index) => (
-    <option
-      onClick={() => handleOption(officer)}
-      key={index}
-      label={`${officer?.firstName} ${officer?.lastName}`}
-      value={officer?._id}
-    >
-      {`${officer.firstName} ${officer.lastName}`}
-    </option>
-  ));
-  const handleAcceptFir = ()=>{
-    setIsButtonActive(true);
-  }
 
+  const submitUpdatedStatusHandler = () => {
+    if (optionSelected) {
+      const data = {
+        status: optionSelected,
+        firId: firData._id,
+      };
+      axios
+        .post("http://localhost:9002/policeMenUpdateStatus", data)
+        .then((res) => {
+          toast.success(`Update status successfully`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            containerStyle: { width: "500px" },
+          });
+        })
+        .catch((err) => {
+          toast.error(`Try Again!!`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            containerStyle: { width: "500px" },
+          });
+        });
+    } else {
+      toast.error(`Update status first!`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        containerStyle: { width: "500px" },
+      });
+    }
+  };
 
-  
   return (
     <div>
       <Navbar />
@@ -187,53 +212,25 @@ const Firdetail = () => {
                       <br />
                       <br />
                     </Typography>
-                    <Button
-                      className="buttons"
-                      sx={{ m: 2 }}
-                      variant="outlined"
-                      onClick={handleAcceptFir}
+                    <span className="updatespan">Update Status:</span>
+                    <select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={optionSelected}
+                      onChange={handleSelectChange}
                     >
-                      Accept
-                    </Button>
-                    <br />
-                    <Button
-                    disabled={isButtonActive}
-                      className="buttons"
-                      variant="outlined"
-                      color="error"
-                    >
-                      Reject
-                    </Button>
-
-                    <Typography variant="h6" component="div">
-                      Assign Police Officer:
-                      <FormControl
-                        sx={{ m: 1, minWidth: 80 }}
-                       
-                      >
-                        <select
-                          labelId="demo-simple-select-autowidth-label"
-                          id="demo-simple-select-autowidth"
-                          value={optionSelected}
-                          onChange={handleChange}
-                        >
-                          <option value={"none"} disabled selected>
-                            None
-                          </option>
-                          {optionElements}
-                        </select>
-                      </FormControl>
-                    </Typography>
+                      <option default>none</option>
+                      <option value={"pending"}>pending</option>
+                      <option value={"approved"}>approved</option>
+                      <option value={"reject"}>reject</option>
+                      <option value={"hold"}>hold</option>
+                      <option value={"assigned"}>assigned</option>
+                      <option value={"accepted"}>accepted</option>
+                    </select>
                   </CardContent>
                   <CardActions>
-                    <Button
-                      disabled={!setIsButtonActive}
-                      size="small"
-                      sx={{ mx: "auto", width: 400 }}
-                      variant="contained"
-                      onClick={submitStatusHandler}
-                    >
-                      Assign Officer
+                    <Button onClick={submitUpdatedStatusHandler}>
+                      Submit Status
                     </Button>
                   </CardActions>
                 </Card>
@@ -248,4 +245,4 @@ const Firdetail = () => {
   );
 };
 
-export default Firdetail;
+export default PoliceFirdetail;

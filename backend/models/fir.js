@@ -11,7 +11,7 @@ const Fir = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "approved", "reject", "hold"],
+      enum: ["pending", "approved", "reject", "hold", "assigned", "accepted"],
       default: "pending",
     },
     complaintUser: {
@@ -68,6 +68,10 @@ const Fir = new mongoose.Schema(
       },
       pinCode: {
         type: String,
+      },
+      policeMenId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
       },
     },
   },

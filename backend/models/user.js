@@ -25,6 +25,18 @@ const User = new mongoose.Schema({
     type: String,
     required: true,
   },
+  state: {
+    type: String,
+  },
+  address: {
+    type: String,
+  },
+  pincode: {
+    type: String,
+  },
+  district: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", User);

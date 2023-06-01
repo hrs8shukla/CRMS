@@ -15,7 +15,9 @@ import Superadmin from "./superAdmin/Superadmin";
 import Adminfirs from "./AdminFirs/Adminfirs";
 import Firdetail from "./adminFirDetails/Firdetail";
 import PoliceOfficer from "./PoliceOfficer/PoliceOfficer";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PoliceFirdetail from "./PoliceOfficer/PoliceFirDetail";
 export default function App() {
   const [user, setLoginUser] = useState({});
 
@@ -26,6 +28,7 @@ export default function App() {
         <Route path="/superadmin" element={<Superadmin />} />
         <Route path="/totalfirs" element={<Adminfirs />} />
         <Route path="/getFirById/:id" element={<Firdetail />} />
+        <Route path="/getFirByIdpolice/:id" element={<PoliceFirdetail />} />
         <Route path="/policeofficer" element={<PoliceOfficer />} />
        
         <Route
@@ -44,6 +47,18 @@ export default function App() {
         />
         <Route path="/ForgetPassOTP" element={<ForgetPassOTP />} />
       </Routes>
+      <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+      />
 
       {/* <LandingPage/>
          <Navbar />

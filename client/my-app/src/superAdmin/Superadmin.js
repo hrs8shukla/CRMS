@@ -3,6 +3,7 @@ import { TextField, Button } from "@mui/material";
 import "./Superadmin.css";
 import axios from "axios";
 import Navbar from "./Navbar";
+import { toast } from "react-toastify";
 //aadharNo, firstName, lastName, email,password
 
 const Superadmin = () => {
@@ -13,6 +14,11 @@ const Superadmin = () => {
     email: "",
     password: "",
     aadharNo: "",
+    district: "",
+
+    state: "",
+    pincode: "",
+    address: "",
   });
   const [isAadharVerified, setIsAadharVerified] = useState(false);
   const handleInput = (e) => {
@@ -41,12 +47,43 @@ const Superadmin = () => {
   };
 
   const handleSubmit = () => {
-    const { firstName, lastName, email, password, aadharNo } = policeData;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      aadharNo,
+      district,
+      state,
+      pincode,
+      address,
+    } = policeData;
 
-    if (firstName && lastName && email && password && chk_exp.test(aadharNo)) {
+    if (
+      firstName &&
+      lastName &&
+      email &&
+      password &&
+      chk_exp.test(aadharNo) &&
+      address &&
+      pincode &&
+      state &&
+      district
+    ) {
       axios
-        .post("http://localhost:9002/AdminSignUP", policeData)
+        .post("http://localhost:9002/headOfficer/createPoliceMan", policeData)
         .then((res) => {
+          toast.success(`Created Policeman successfully`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            containerStyle: { width: "500px" },
+          });
           console.log(res);
           setPoliceData({
             firstName: "",
@@ -54,13 +91,27 @@ const Superadmin = () => {
             email: "",
             password: "",
             aadharNo: "",
+            district: "",
+            state: "",
+            pincode: "",
+            address: "",
           });
         })
         .catch((err) => {
+          toast.error(`Server error.Try again!`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            containerStyle: { width: "500px" },
+          });
           console.log(err);
         });
     } else {
-      alert("fill all the fields correctly!!");
     }
   };
   return (
@@ -84,7 +135,45 @@ const Superadmin = () => {
           label="Last Name"
           variant="outlined"
           className="textField"
-          style={{ marginBottom: "10px" }}
+          style={{ marginBottom: "10px", marginRight: "10px" }}
+        />
+        <br />
+        <TextField
+          onChange={handleInput}
+          name="district"
+          id="outlined-basic"
+          label="District"
+          variant="outlined"
+          className="textField"
+          style={{ marginBottom: "10px", marginRight: "10px" }}
+        />
+        <TextField
+          onChange={handleInput}
+          name="pincode"
+          id="outlined-basic"
+          label="Pincode"
+          variant="outlined"
+          className="textField"
+          style={{ marginBottom: "10px", marginRight: "10px" }}
+        />
+        <br />
+        <TextField
+          onChange={handleInput}
+          name="address"
+          id="outlined-basic"
+          label="Address"
+          variant="outlined"
+          className="textField"
+          style={{ marginBottom: "10px", marginRight: "10px" }}
+        />
+        <TextField
+          onChange={handleInput}
+          name="state"
+          id="outlined-basic"
+          label="State"
+          variant="outlined"
+          className="textField"
+          style={{ marginBottom: "10px", marginRight: "10px" }}
         />
         <br />
         <TextField
@@ -126,11 +215,11 @@ const Superadmin = () => {
         />
         <br />
         <Button
-          style={{ marginBottom: "10px", width: "150px" }}
+          style={{ marginBottom: "10px", width: "200px" }}
           variant="contained"
           onClick={handleSubmit}
         >
-          Submit
+          Create Policeman
         </Button>
       </div>
     </>

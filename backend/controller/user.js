@@ -1,5 +1,6 @@
 const User = require("../models/user");
 var bcrypt = require("bcryptjs");
+const fir = require("../models/fir");
 const generateToken = require("../service/commonService").generateToken;
 var hashPassword = require("../service/commonService").hashPassword;
 
@@ -30,10 +31,9 @@ module.exports = {
             firstName,
             lastName,
             password,
-            userType: "citizen"
+            userType: "citizen",
           });
           newUser.password = await hashPassword(newUser.password);
-
           const status = await newUser.save();
           if (status) {
             console.log(status);
@@ -76,6 +76,16 @@ module.exports = {
       }
     } catch (err) {
       console.log("login issue", err);
+    }
+  },
+  getUsersFir: async (req, res) => {
+    try {
+      var result = await fir.find({ userId: req.body.id });
+
+      return res.status(200).send(result);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).send({ message: "internal server error" });
     }
   },
 };

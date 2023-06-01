@@ -1,6 +1,28 @@
 import React from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
+  const navigate= useNavigate();
+  const logoutStyle = {
+    display:'block',
+    backgroundColor:'#fff',
+    color: 'black',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    margin: '0 20px',
+    padding:'5px 10px',
+    borderRadius: '5px',
+    cursor:'pointer'
+  }
+  const handleLogout = () =>{
+    localStorage.removeItem('isLogged');
+    navigate("/AdminLogin");
+  }
+  const userId = localStorage.getItem("userId");
+  const handlenavigate = ()=>{
+    navigate("/policeofficer", { state: userId });
+  }
+
   return (
     <>
       <nav
@@ -16,10 +38,14 @@ export default function Navbar() {
           <i class="fas fa-bars"></i>
         </label>
         <ul className="nav-list v-class-resp">
-          <li>
-            <a href="#">Total FIRs</a>
+          <li >
+            <div onClick={handlenavigate}><a>Total FIRs</a></div>
           </li>
         </ul>
+       
+        <div style={logoutStyle} onClick={handleLogout}>
+        <a>Logout</a>
+        </div>
       </nav>
     </>
   );
