@@ -121,7 +121,7 @@ export default function Adminlogin({ setLoginUser }) {
     </div>
       <div class="align-items-center ">
         <p class="mb-0">
-          &copy; 2022 - 2023 | All Rights Reserved - Pallavi Kumari
+          &copy; 2022 - 2023 | All Rights Reserved - Harshit Shukla
           <a href="#" class="text-copy">
             Privacy Policy
           </a>{" "}

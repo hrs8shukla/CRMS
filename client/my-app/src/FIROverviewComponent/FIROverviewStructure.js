@@ -65,7 +65,7 @@ export default function FIROverviewStructure({firs}){
       </Grid>
    </div>
    <div class="align-items-center-FOV ">
-       <p class="mb-0">&copy; 2022 - 2023 | All Rights Reserved - Pallavi Kumari
+       <p class="mb-0">&copy; 2022 - 2023 | All Rights Reserved - Harshit Shukla
          <a href="#" class="text-copy">Privacy Policy</a> |
          <a href="#" class="text-term">Terms of Use</a>
        </p>
